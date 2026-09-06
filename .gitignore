@@ -1,0 +1,40 @@
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# ChromaDB / generated vector database
+chroma_db/
+data/chroma_db/
+*.sqlite3
+
+# Environment variables / secrets
+.env
+.env.*
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+# VaultAI runtime/generated data
+data/chroma/
+data/audit/
+data/documents/*.pdf
+data/documents/metadata.json
+
+# Build/dependency artifacts
+node_modules/
+.next/
+dist/
+build/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Local source archives
+*.zip
