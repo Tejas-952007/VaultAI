@@ -8,6 +8,10 @@ It combines **document intelligence, RAG, local AI models, coding assistance, vi
 
 > **Built for Smart India Hackathon 2026 — Problem Statement 26117 (MRPL)**
 
+## 🎥 Live Demo
+
+[▶️ Watch VaultAI Live Demo on YouTube](https://youtu.be/0AbFoRXtInE)
+
 ## Features
 
 * 📚 Local document knowledge base
