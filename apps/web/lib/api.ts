@@ -148,9 +148,14 @@ export const VaultAPI = {
   },
 
   /** POST /api/v1/documents/upload  (PDF only) */
-  async uploadDocument(file: File): Promise<DocumentMeta> {
+  async uploadDocument(file: File, okfConceptId?: string): Promise<DocumentMeta> {
     const form = new FormData();
     form.append('file', file);
+
+    if (okfConceptId) {
+      form.append('okf_concept_id', okfConceptId);
+    }
+
     const res = await fetch(`${API}/documents`, {
       method: 'POST',
       credentials: 'include',

@@ -1,0 +1,27 @@
+concept:
+  type: document
+  id: sop
+  name: Standard Operating Procedure
+  description: >
+    A controlled document containing procedures, instructions,
+    safety requirements, and operational steps for industrial processes.
+
+metadata:
+  category: industrial_document
+  document_type: SOP
+  sensitivity: confidential
+
+access:
+  allowed_roles:
+    - admin
+    - engineer
+    - analyst
+
+retrieval:
+  enabled: true
+  collection: industrial_documents
+
+processing:
+  chunking: true
+  embeddings: true
+  citation_required: true

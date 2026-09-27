@@ -1,7 +1,7 @@
 from pathlib import Path
 from uuid import uuid4
 from typing import List
-from fastapi import APIRouter, UploadFile, File, HTTPException, status, Depends
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status, Depends
 from backend.app.auth.authorization import require_permission
 from backend.app.db.models import Employee
 from backend.app.rag.ingestion import ingest_pdf, IngestionError
@@ -39,6 +39,7 @@ async def upload_vision_image(
 @router.post("/documents", status_code=status.HTTP_201_CREATED)
 async def upload_document(
     file: UploadFile = File(...),
+    okf_concept_id: str | None = Form(default=None),
     employee: Employee = Depends(require_permission("DOCUMENT_UPLOAD")),
 ):
     client_ip = "unknown"
@@ -64,7 +65,11 @@ async def upload_document(
         if safe_path.suffix.lower() != ".pdf":
             raise IngestionError("Only PDF files are supported.")
 
-        doc = ingest_pdf(file_bytes=content, original_filename=file.filename or "upload.pdf")
+        doc = ingest_pdf(
+            file_bytes=content,
+            original_filename=file.filename or "upload.pdf",
+            okf_concept_id=okf_concept_id,
+        )
         return doc
     except IngestionError as e:
         raise HTTPException(

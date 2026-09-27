@@ -16,7 +16,10 @@ async def post_chat(request: ChatRequest, employee: Employee = Depends(require_c
         raise HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail={"status": "error", "error": {"code": "RATE_LIMITED", "message": "Too many chat requests. Please wait a moment and try again."}})
 
     try:
-        return await chat_service.handle_chat(request)
+        return await chat_service.handle_chat(
+            request,
+            employee_position=employee.position.name if employee.position else None,
+        )
     except OllamaServiceError as e:
         status_code = status.HTTP_503_SERVICE_UNAVAILABLE if e.code in ["MODEL_UNAVAILABLE", "MODEL_TIMEOUT"] else status.HTTP_500_INTERNAL_SERVER_ERROR
         raise HTTPException(

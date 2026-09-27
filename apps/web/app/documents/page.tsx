@@ -10,6 +10,7 @@ export default function DocumentHub() {
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [okfConceptId, setOkfConceptId] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const fetchDocuments = async () => {
@@ -37,7 +38,10 @@ export default function DocumentHub() {
     setUploadError(null);
     setIsUploading(true);
     try {
-      const doc = await VaultAPI.uploadDocument(file);
+      const doc = await VaultAPI.uploadDocument(
+        file,
+        okfConceptId || undefined
+      );
       setDocuments(prev => {
         const without = prev.filter(d => d.id !== doc.id);
         return [...without, doc];
@@ -73,6 +77,19 @@ export default function DocumentHub() {
               onChange={e => setSearchQuery(e.target.value)}
             />
           </div>
+
+          {/* OKF concept selector */}
+          <select
+            value={okfConceptId}
+            onChange={e => setOkfConceptId(e.target.value)}
+            disabled={isUploading}
+            className="px-4 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 text-xs font-medium outline-none focus:border-cyan-500"
+            title="Optional OKF document concept"
+          >
+            <option value="">No OKF concept</option>
+            <option value="sop">SOP</option>
+            <option value="pid">P&ID</option>
+          </select>
 
           {/* Upload button */}
           <label className={`flex items-center gap-2 px-6 py-2 rounded-lg text-xs font-bold transition cursor-pointer ${isUploading ? "bg-slate-700 text-slate-400 cursor-wait" : "bg-emerald-600 hover:bg-emerald-500 text-white"}`}>

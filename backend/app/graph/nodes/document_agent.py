@@ -5,6 +5,7 @@ from backend.app.services.ollama_service import ollama_service
 from backend.app.rag.selection import document_selector
 from backend.app.rag.retrieval import retriever
 from backend.app.audit.audit import audit_logger
+from backend.app.services.okf_service import okf_service
 
 
 def document_agent_node(state: VaultAIState) -> VaultAIState:
@@ -20,6 +21,41 @@ def document_agent_node(state: VaultAIState) -> VaultAIState:
     )
 
     available_docs = document_store.list_documents(ready_only=True)
+
+    # Apply OKF access rules only to documents that have an OKF concept.
+    # Documents without an OKF concept keep the existing RAG behavior.
+    employee_position = state.get("employee_position")
+    accessible_docs = []
+    denied_doc_ids = []
+
+    for doc in available_docs:
+        concept_id = doc.get("okf_concept_id")
+
+        if not concept_id:
+            accessible_docs.append(doc)
+            continue
+
+        if okf_service.is_position_allowed(
+            concept_id=concept_id,
+            position_name=employee_position or "",
+        ):
+            accessible_docs.append(doc)
+        else:
+            document_id = doc.get("id") or doc.get("document_id")
+            if document_id:
+                denied_doc_ids.append(document_id)
+
+    available_docs = accessible_docs
+
+    audit_logger.log(
+        event_type="okf_access_check",
+        resource_id=request_id,
+        details={
+            "employee_position": employee_position,
+            "accessible_document_count": len(available_docs),
+            "denied_document_ids": denied_doc_ids,
+        },
+    )
 
     if not available_docs:
         audit_logger.log(

@@ -1,0 +1,36 @@
+{
+  "status": "partial",
+  "completed_questions": 2,
+  "dataset_questions": 24,
+  "model": "qwen3.5:latest",
+  "quantization": "Q4_K_M",
+  "execution": {
+    "offline": true,
+    "device": "CPU; no NVIDIA GPU detected",
+    "ollama_timeout_seconds": 600,
+    "note": "Stopped early because CPU inference was too slow for a practical full run. These are pilot results, not full-dataset metrics."
+  },
+  "metric_protocol": "Existing evaluation/run_eval.py pipeline. Faithfulness and answer relevancy are judged locally with the configured Ollama model; Recall@5 uses the existing Chroma retrieval results.",
+  "pilot_summary": {
+    "Recall@5": 1.0,
+    "Faithfulness": 1.0,
+    "Answer Relevancy": 0.8903,
+    "Average Query Pipeline Latency Seconds": 291.95
+  },
+  "results": [
+    {
+      "id": "q01",
+      "recall_at_5": 1.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.9514,
+      "latency_seconds": 217.94
+    },
+    {
+      "id": "q02",
+      "recall_at_5": 1.0,
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8292,
+      "latency_seconds": 365.96
+    }
+  ]
+}

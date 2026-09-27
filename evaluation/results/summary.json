@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-09-25T23:29:01.107245+00:00",
+  "dataset": "evaluation/dataset.json",
+  "n_questions": 24,
+  "vector_store": "ChromaDB PersistentClient (data/chroma, collection vaultai_collection, cosine HNSW)",
+  "retriever": "backend.app.rag.retrieval.Retriever (RETRIEVAL_TOP_K=5)",
+  "embeddings": "sentence-transformers all-MiniLM-L6-v2",
+  "llm": "Ollama qwen3.5:latest via backend.app.services.ollama_service",
+  "metrics_protocol": "RAGAS Faithfulness and Answer Relevancy, computed locally with Ollama + MiniLM (ragas package not used to keep evaluation air-gapped)",
+  "Recall@5": 0.9166666666666666,
+  "Faithfulness": 0.5637235294117646,
+  "Answer Relevancy": 0.6915,
+  "Average Latency seconds/query": 75.33433333333333,
+  "n_faithfulness_scored": 17,
+  "n_relevancy_scored": 18,
+  "headline": {
+    "Recall@5": "91.67%",
+    "Faithfulness": "56.37%",
+    "Answer Relevancy": "69.15%",
+    "Average Latency": "75.33 seconds/query"
+  }
+}

@@ -1,0 +1,35 @@
+concept:
+  type: agent
+  id: document_rag
+  name: Document RAG Agent
+  description: >
+    Retrieves relevant information from authorized industrial documents
+    and generates grounded answers with document citations.
+
+agent:
+  framework: langgraph
+  purpose:
+    - document_retrieval
+    - question_answering
+    - grounded_response
+
+access:
+  allowed_roles:
+    - admin
+    - engineer
+    - analyst
+
+retrieval:
+  vector_store: chromadb
+  collection: industrial_documents
+  metadata_filtering: true
+  citation_required: true
+
+security:
+  authentication_required: true
+  authorization_required: true
+  audit_logging: true
+
+output:
+  grounded_only: true
+  include_sources: true

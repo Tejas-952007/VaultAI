@@ -6,6 +6,7 @@ class VaultAIState(TypedDict, total=False):
     request_id: str
     message: str
     document_ids: Optional[List[str]]
+    employee_position: Optional[str]
     route: str
     selected_documents: List[str]
     evidence: List[EvidenceItem]

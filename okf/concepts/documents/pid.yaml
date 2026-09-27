@@ -1,0 +1,27 @@
+concept:
+  type: document
+  id: pid
+  name: Process and Instrumentation Diagram
+  description: >
+    An industrial engineering drawing representing process equipment,
+    pipelines, instrumentation, and process connections.
+
+metadata:
+  category: industrial_document
+  document_type: P&ID
+  sensitivity: confidential
+
+access:
+  allowed_roles:
+    - admin
+    - engineer
+
+retrieval:
+  enabled: true
+  collection: industrial_documents
+
+processing:
+  chunking: true
+  embeddings: true
+  vision_required: true
+  citation_required: true

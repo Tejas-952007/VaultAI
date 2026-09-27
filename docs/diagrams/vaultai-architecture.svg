@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">VaultAI local-first architecture</title>
+  <desc id="description">The Next.js interface calls a FastAPI backend and LangGraph router. Document, coding and vision agents use local Ollama models, local document and vector storage, PostgreSQL, audit logs, and an isolated Docker sandbox inside an on-premises boundary.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#52708e"/></marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#17845d"/></marker>
+    <style>
+      text { font-family: Aptos, Inter, Arial, sans-serif; fill: #172b42; }
+      .eyebrow { font-size: 16px; font-weight: 700; letter-spacing: 2px; fill: #17845d; }
+      .title { font-size: 38px; font-weight: 700; }
+      .subtitle { font-size: 19px; fill: #597087; }
+      .section { font-size: 15px; font-weight: 700; letter-spacing: 1.3px; fill: #60758b; }
+      .card-title { font-size: 20px; font-weight: 700; }
+      .card-copy { font-size: 16px; fill: #587087; }
+      .small { font-size: 14px; fill: #60758b; }
+      .connector { fill: none; stroke: #52708e; stroke-width: 3; marker-end: url(#arrow); }
+      .connector-green { fill: none; stroke: #17845d; stroke-width: 3; marker-end: url(#arrow-green); }
+      .local-link { fill: none; stroke: #17845d; stroke-width: 2.5; stroke-dasharray: 7 6; marker-end: url(#arrow-green); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f4f7fa"/>
+  <text x="64" y="52" class="eyebrow">SMART INDIA HACKATHON 2026  ·  PS 26117  ·  MRPL</text>
+  <text x="64" y="101" class="title">VaultAI system architecture</text>
+  <text x="64" y="134" class="subtitle">Self-hosted, local-first AI workbench for confidential organizational knowledge</text>
+
+  <rect x="48" y="160" width="1504" height="690" rx="24" fill="#ffffff" stroke="#cfdae5" stroke-width="2"/>
+  <rect x="76" y="179" width="500" height="30" rx="15" fill="#e7f5ee"/>
+  <text x="94" y="200" class="small" style="font-weight:700; fill:#177451; letter-spacing:1px">MRPL ON-PREMISES ENVIRONMENT · NO CLOUD INFERENCE</text>
+
+  <text x="88" y="244" class="section">USER INTERFACE</text>
+  <text x="354" y="244" class="section">APPLICATION BACKEND</text>
+  <text x="921" y="244" class="section">AGENTS</text>
+  <text x="1260" y="244" class="section">LOCAL SERVICES</text>
+
+  <path d="M286 372 H330" class="connector"/>
+  <path d="M590 372 H634" class="connector"/>
+  <path d="M824 372 H858 V318 H894" class="connector"/>
+  <path d="M858 372 V451 H894" fill="none" stroke="#52708e" stroke-width="3"/>
+  <path d="M858 451 V584 H894" fill="none" stroke="#52708e" stroke-width="3"/>
+  <path d="M858 318 H894" class="connector"/>
+  <path d="M858 451 H894" class="connector"/>
+  <path d="M858 584 H894" class="connector"/>
+  <path d="M1174 318 H1204" class="connector-green"/>
+  <path d="M1174 348 H1190 V565 H1204" class="local-link"/>
+  <path d="M1174 451 H1204 V405" class="connector-green"/>
+  <path d="M1174 584 H1204 V405" class="connector-green"/>
+
+  <g>
+    <rect x="82" y="304" width="204" height="136" rx="18" fill="#f2f8fb" stroke="#c5d9e5" stroke-width="2"/>
+    <text x="184" y="351" text-anchor="middle" class="card-title">Analyst</text>
+    <text x="184" y="382" text-anchor="middle" class="card-copy">Next.js web app</text>
+    <text x="184" y="408" text-anchor="middle" class="small">Workbench · documents · evidence</text>
+
+    <rect x="332" y="286" width="258" height="172" rx="18" fill="#eef5fb" stroke="#b8cde0" stroke-width="2"/>
+    <text x="461" y="329" text-anchor="middle" class="card-title">FastAPI backend</text>
+    <text x="461" y="361" text-anchor="middle" class="card-copy">Chat · document APIs</text>
+    <text x="461" y="387" text-anchor="middle" class="card-copy">Authentication · RBAC</text>
+    <text x="461" y="426" text-anchor="middle" class="small">Local service boundary</text>
+
+    <rect x="636" y="315" width="188" height="114" rx="18" fill="#f3effa" stroke="#d4c7e7" stroke-width="2"/>
+    <text x="730" y="359" text-anchor="middle" class="card-title">LangGraph</text>
+    <text x="730" y="390" text-anchor="middle" class="card-copy">Controlled router</text>
+
+    <rect x="896" y="267" width="278" height="102" rx="16" fill="#eaf5ef" stroke="#b6d8c4" stroke-width="2"/>
+    <text x="1035" y="307" text-anchor="middle" class="card-title">Document agent</text>
+    <text x="1035" y="338" text-anchor="middle" class="card-copy">Select · retrieve · ground answer</text>
+
+    <rect x="896" y="400" width="278" height="102" rx="16" fill="#f5f1fc" stroke="#d5c6ed" stroke-width="2"/>
+    <text x="1035" y="440" text-anchor="middle" class="card-title">Coding agent</text>
+    <text x="1035" y="471" text-anchor="middle" class="card-copy">Generate code · request sandbox</text>
+
+    <rect x="896" y="533" width="278" height="102" rx="16" fill="#fdf0f3" stroke="#e8c5cf" stroke-width="2"/>
+    <text x="1035" y="573" text-anchor="middle" class="card-title">Vision agent</text>
+    <text x="1035" y="604" text-anchor="middle" class="card-copy">Analyze a supplied image</text>
+
+    <rect x="1206" y="267" width="310" height="206" rx="18" fill="#eef5fb" stroke="#b8cde0" stroke-width="2"/>
+    <text x="1361" y="306" text-anchor="middle" class="card-title">Ollama · local models</text>
+    <line x1="1230" y1="324" x2="1492" y2="324" stroke="#d2dfeb" stroke-width="2"/>
+    <text x="1234" y="356" class="card-copy">Document  ·  Qwen3.5</text>
+    <text x="1234" y="391" class="card-copy">Coding  ·  Qwen2.5-Coder 7B</text>
+    <text x="1234" y="426" class="card-copy">Vision  ·  Qwen3-VL 8B</text>
+    <text x="1361" y="454" text-anchor="middle" class="small">Inference stays on-prem</text>
+
+    <rect x="1206" y="498" width="310" height="140" rx="18" fill="#f7fafc" stroke="#cbd8e5" stroke-width="2"/>
+    <text x="1361" y="532" text-anchor="middle" class="card-title">Local document knowledge</text>
+    <text x="1232" y="569" class="card-copy">PDFs + JSON metadata</text>
+    <text x="1232" y="601" class="card-copy">ChromaDB + MiniLM vectors</text>
+    <text x="1232" y="625" class="small">Top-k retrieval with source IDs</text>
+  </g>
+
+  <line x1="76" y1="666" x2="1524" y2="666" stroke="#e4ebf1" stroke-width="2"/>
+  <text x="88" y="698" class="section">LOCAL CONTROL &amp; ISOLATION</text>
+
+  <path d="M461 458 V711 H218 V728" class="local-link"/>
+  <path d="M461 458 V711 H514 V728" class="local-link"/>
+  <path d="M461 458 V711 H810 V728" class="local-link"/>
+  <path d="M461 458 V711 H1106 V728" class="local-link"/>
+  <path d="M1035 502 V711 H1400 V728" class="local-link"/>
+
+  <g>
+    <rect x="82" y="728" width="272" height="88" rx="15" fill="#f7fafc" stroke="#cbd8e5" stroke-width="2"/>
+    <text x="218" y="764" text-anchor="middle" class="card-title" style="font-size:18px">Document files</text>
+    <text x="218" y="792" text-anchor="middle" class="small">PDF + local metadata JSON</text>
+
+    <rect x="378" y="728" width="272" height="88" rx="15" fill="#f7fafc" stroke="#cbd8e5" stroke-width="2"/>
+    <text x="514" y="764" text-anchor="middle" class="card-title" style="font-size:18px">Vector index</text>
+    <text x="514" y="792" text-anchor="middle" class="small">Persistent ChromaDB</text>
+
+    <rect x="674" y="728" width="272" height="88" rx="15" fill="#f7fafc" stroke="#cbd8e5" stroke-width="2"/>
+    <text x="810" y="764" text-anchor="middle" class="card-title" style="font-size:18px">PostgreSQL</text>
+    <text x="810" y="792" text-anchor="middle" class="small">Accounts · roles · permissions</text>
+
+    <rect x="970" y="728" width="272" height="88" rx="15" fill="#f7fafc" stroke="#cbd8e5" stroke-width="2"/>
+    <text x="1106" y="764" text-anchor="middle" class="card-title" style="font-size:18px">Audit trail</text>
+    <text x="1106" y="792" text-anchor="middle" class="small">Local log + audit API</text>
+
+    <rect x="1266" y="728" width="250" height="88" rx="15" fill="#fff7e7" stroke="#e4c77e" stroke-width="2"/>
+    <text x="1391" y="764" text-anchor="middle" class="card-title" style="font-size:18px">Docker sandbox</text>
+    <text x="1391" y="792" text-anchor="middle" class="small">Coding · network disabled</text>
+  </g>
+
+  <text x="1515" y="836" text-anchor="end" class="small">Local models · local data · controlled execution</text>
+</svg>

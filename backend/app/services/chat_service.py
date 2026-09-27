@@ -7,7 +7,11 @@ from backend.app.audit.audit import audit_logger
 
 
 class ChatService:
-    async def handle_chat(self, request: ChatRequest) -> ChatResponse:
+    async def handle_chat(
+        self,
+        request: ChatRequest,
+        employee_position: str | None = None,
+    ) -> ChatResponse:
         request_id = str(uuid.uuid4())
 
         audit_logger.log(
@@ -20,6 +24,7 @@ class ChatService:
             "request_id": request_id,
             "message": request.message,
             "document_ids": request.document_ids,
+            "employee_position": employee_position,
             "image_path": request.image_path,
             "route": "document",
             "selected_documents": [],

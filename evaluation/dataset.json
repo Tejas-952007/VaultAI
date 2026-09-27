@@ -1,0 +1,229 @@
+{
+  "description": "Grounded evaluation questions drawn from the ingested VaultAI knowledge base in data/documents and data/chroma (vaultai_collection).",
+  "knowledge_base_documents": [
+    {
+      "document_id": "87df8421-1bc7-4f42-8c61-29400f315498",
+      "filename": "engineering_report.pdf",
+      "chunks_count": 1
+    },
+    {
+      "document_id": "e9a57b94-67c9-4f83-bd2f-4817b222034b",
+      "filename": "VaultAI_Testing_Sample.pdf",
+      "chunks_count": 2
+    },
+    {
+      "document_id": "d7c16522-b661-4d6a-98d9-517da76373c6",
+      "filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "chunks_count": 123
+    }
+  ],
+  "questions": [
+    {
+      "id": "q01",
+      "question": "What is the safety operating pressure limit for Reactor 4B?",
+      "relevant_document_ids": ["87df8421-1bc7-4f42-8c61-29400f315498"],
+      "relevant_chunk_ids": ["87df8421-1bc7-4f42-8c61-29400f315498_c1"],
+      "source_filename": "engineering_report.pdf",
+      "gold_answer_hint": "320 PSI"
+    },
+    {
+      "id": "q02",
+      "question": "What temperature triggers the emergency shutoff valve in the MRPL Refinery Unit 4 engineering report?",
+      "relevant_document_ids": ["87df8421-1bc7-4f42-8c61-29400f315498"],
+      "relevant_chunk_ids": ["87df8421-1bc7-4f42-8c61-29400f315498_c1"],
+      "source_filename": "engineering_report.pdf",
+      "gold_answer_hint": "240 degrees Celsius"
+    },
+    {
+      "id": "q03",
+      "question": "Which refinery unit is described in the VaultAI confidential engineering report?",
+      "relevant_document_ids": ["87df8421-1bc7-4f42-8c61-29400f315498"],
+      "relevant_chunk_ids": ["87df8421-1bc7-4f42-8c61-29400f315498_c1"],
+      "source_filename": "engineering_report.pdf",
+      "gold_answer_hint": "MRPL Refinery Unit 4"
+    },
+    {
+      "id": "q04",
+      "question": "According to the engineering report, what is the operating pressure limit in PSI for Reactor 4B?",
+      "relevant_document_ids": ["87df8421-1bc7-4f42-8c61-29400f315498"],
+      "relevant_chunk_ids": ["87df8421-1bc7-4f42-8c61-29400f315498_c1"],
+      "source_filename": "engineering_report.pdf",
+      "gold_answer_hint": "320 PSI"
+    },
+    {
+      "id": "q05",
+      "question": "What is the document ID of the VaultAI test document?",
+      "relevant_document_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b"],
+      "relevant_chunk_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b_c1"],
+      "source_filename": "VaultAI_Testing_Sample.pdf",
+      "gold_answer_hint": "VAULT-TEST-001"
+    },
+    {
+      "id": "q06",
+      "question": "How often should the equipment be inspected according to the VaultAI test document?",
+      "relevant_document_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b"],
+      "relevant_chunk_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b_c1"],
+      "source_filename": "VaultAI_Testing_Sample.pdf",
+      "gold_answer_hint": "30 minutes"
+    },
+    {
+      "id": "q07",
+      "question": "What should the operator do if an abnormal reading is detected in the VaultAI test procedure?",
+      "relevant_document_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b"],
+      "relevant_chunk_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b_c1"],
+      "source_filename": "VaultAI_Testing_Sample.pdf",
+      "gold_answer_hint": "stop the process and notify the shift supervisor"
+    },
+    {
+      "id": "q08",
+      "question": "What is the document status of the VaultAI test document?",
+      "relevant_document_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b"],
+      "relevant_chunk_ids": [
+        "e9a57b94-67c9-4f83-bd2f-4817b222034b_c1",
+        "e9a57b94-67c9-4f83-bd2f-4817b222034b_c2"
+      ],
+      "source_filename": "VaultAI_Testing_Sample.pdf",
+      "gold_answer_hint": "Active"
+    },
+    {
+      "id": "q09",
+      "question": "Which department owns the VaultAI test document?",
+      "relevant_document_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b"],
+      "relevant_chunk_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b_c1"],
+      "source_filename": "VaultAI_Testing_Sample.pdf",
+      "gold_answer_hint": "Operations"
+    },
+    {
+      "id": "q10",
+      "question": "What must the operator verify before starting the demo process?",
+      "relevant_document_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b"],
+      "relevant_chunk_ids": ["e9a57b94-67c9-4f83-bd2f-4817b222034b_c1"],
+      "source_filename": "VaultAI_Testing_Sample.pdf",
+      "gold_answer_hint": "equipment status is NORMAL"
+    },
+    {
+      "id": "q11",
+      "question": "According to the process engineering drawings document, are P&IDs scale drawings?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c7"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "P&IDs are NOT scale drawings"
+    },
+    {
+      "id": "q12",
+      "question": "What British Standard specification is referenced for P&ID symbols?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c5"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "BS1553"
+    },
+    {
+      "id": "q13",
+      "question": "In pipeline product designations, what does PL stand for, and what are alternative codes for it?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c12"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "Process Liquid; HC = Hydrocarbons, PO = Produced Oil"
+    },
+    {
+      "id": "q14",
+      "question": "What does the pipeline specification code CS1 mean?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c15"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "Carbon Steel - Schedule 40"
+    },
+    {
+      "id": "q15",
+      "question": "What system number may identify the Instrument Air System?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c13"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "System 62"
+    },
+    {
+      "id": "q16",
+      "question": "What does insulation class P/A indicate for a pipeline?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": [
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c18",
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c19"
+      ],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "personnel protection and acoustic protection"
+    },
+    {
+      "id": "q17",
+      "question": "Why must a gate valve never be used for control service?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c29"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "flow across the valve will cut away the sealing surfaces"
+    },
+    {
+      "id": "q18",
+      "question": "What are valves used for one-way service called, and what is the most common type?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": [
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c34",
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c35"
+      ],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "check / non-return / one-way valves; swing check valve is most common"
+    },
+    {
+      "id": "q19",
+      "question": "What is an Electrical Submersible Pump (ESP) and where is it typically fitted?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c69"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "multi-stage centrifugal pump fitted to high volume wells that will not flow without mechanical assistance"
+    },
+    {
+      "id": "q20",
+      "question": "What are oil/water cyclones used to separate oil from produced water called?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c62"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "hydro-cyclones"
+    },
+    {
+      "id": "q21",
+      "question": "In the plate type heat exchanger example, what temperature is TIC-1014 set to control the produced oil at?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": [
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c110",
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c111"
+      ],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "65°C"
+    },
+    {
+      "id": "q22",
+      "question": "What do the letters FC mean for valve TV-1014 on the P&ID?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c116"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "Fail Closed"
+    },
+    {
+      "id": "q23",
+      "question": "What is the equipment number of the plate type heat exchanger described in section 2.1?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": [
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c109",
+        "d7c16522-b661-4d6a-98d9-517da76373c6_c110"
+      ],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "E-1001 A"
+    },
+    {
+      "id": "q24",
+      "question": "What do the product designation codes FG, CW, and AI/IA mean on process drawings?",
+      "relevant_document_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6"],
+      "relevant_chunk_ids": ["d7c16522-b661-4d6a-98d9-517da76373c6_c12"],
+      "source_filename": "Process-Flow-PlDs-Process-Engineering-Drawings.pdf",
+      "gold_answer_hint": "Fuel Gas; Cooling Water; Instrument Air"
+    }
+  ]
+}
