@@ -1,0 +1,17 @@
+concept:
+  type: role
+  id: analyst
+  name: Analyst
+  description: >
+    Operational and safety analyst with access to standard operating
+    procedures, inspection reports, and document RAG queries.
+
+access:
+  clearance_level: 3
+  allowed_document_types:
+    - SOP
+    - inspection_report
+    - general
+  can_manage_users: false
+  can_view_audit: false
+  can_execute_code: false

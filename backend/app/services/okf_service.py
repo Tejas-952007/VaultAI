@@ -11,6 +11,7 @@ class OKFService:
         self.okf_root = okf_root or Path("okf")
         self.documents_path = self.okf_root / "concepts" / "documents"
         self.agents_path = self.okf_root / "concepts" / "agents"
+        self.roles_path = self.okf_root / "concepts" / "roles"
 
     def _load_yaml_files(self, directory: Path) -> List[Dict[str, Any]]:
         concepts: List[Dict[str, Any]] = []
@@ -38,6 +39,9 @@ class OKFService:
     def load_agent_concepts(self) -> List[Dict[str, Any]]:
         return self._load_yaml_files(self.agents_path)
 
+    def load_role_concepts(self) -> List[Dict[str, Any]]:
+        return self._load_yaml_files(self.roles_path)
+
     def get_document_concept(
         self, concept_id: str
     ) -> Dict[str, Any] | None:
@@ -60,12 +64,27 @@ class OKFService:
 
         return None
 
-    
+    def get_role_concept(
+        self, role_id: str
+    ) -> Dict[str, Any] | None:
+        for concept in self.load_role_concepts():
+            concept_data = concept.get("concept", {})
+
+            if concept_data.get("id") == role_id:
+                return concept
+
+        return None
+
     # Explicit mapping from VaultAI DB positions to OKF roles.
     # Unmapped positions are denied by default.
     POSITION_TO_OKF_ROLE = {
         "Administrator": "admin",
+        "Senior Engineer": "engineer",
         "Engineer": "engineer",
+        "Safety Officer": "engineer",
+        "Department Manager": "admin",
+        "Technician": "technician",
+        "Clerk": "analyst",
     }
 
     def resolve_okf_role(self, position_name: str) -> str | None:

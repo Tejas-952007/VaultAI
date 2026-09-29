@@ -1,0 +1,19 @@
+concept:
+  type: role
+  id: admin
+  name: Administrator
+  description: >
+    Full administrative access across all industrial documents,
+    system settings, security audits, and agent workflows.
+
+access:
+  clearance_level: 5
+  allowed_document_types:
+    - P&ID
+    - SOP
+    - engineering_report
+    - technical_specification
+    - general
+  can_manage_users: true
+  can_view_audit: true
+  can_execute_code: true

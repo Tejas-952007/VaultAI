@@ -1,0 +1,16 @@
+concept:
+  type: role
+  id: technician
+  name: Technician
+  description: >
+    Field and maintenance technicians accessing operational guidelines
+    and equipment standard operating procedures.
+
+access:
+  clearance_level: 2
+  allowed_document_types:
+    - SOP
+    - maintenance_guide
+  can_manage_users: false
+  can_view_audit: false
+  can_execute_code: false

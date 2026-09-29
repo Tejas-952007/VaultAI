@@ -1,0 +1,23 @@
+concept:
+  type: agent
+  id: vision_agent
+  name: Vision Agent
+  description: >
+    Local multimodal vision agent analyzing diagrams, equipment photos,
+    and process flow schematics via local vision models.
+
+agent:
+  framework: langgraph
+  purpose:
+    - diagram_inspection
+    - visual_qa
+
+access:
+  allowed_roles:
+    - admin
+    - engineer
+    - analyst
+    - technician
+
+security:
+  audit_logging: true

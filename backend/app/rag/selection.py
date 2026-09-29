@@ -26,11 +26,14 @@ class DocumentSelector:
             specified_ready = [did for did in target_document_ids if did in ready_doc_ids]
             return specified_ready
 
-        # Otherwise perform semantic query across all ready documents to select relevant documents
+        # Query candidate pool size: scale with document count to ensure small documents
+        # (e.g. 1-page engineering reports) are not crowded out by large manuals
+        candidate_k = min(150, max(35, len(ready_doc_ids) * 15))
+
         query_results = vector_store.query(
             query_text=question,
             document_ids=ready_doc_ids,
-            top_k=10
+            top_k=candidate_k
         )
 
         selected_doc_scores: Dict[str, float] = {}
@@ -39,6 +42,27 @@ class DocumentSelector:
             score = r["score"]
             if score > selected_doc_scores.get(doc_id, 0.0):
                 selected_doc_scores[doc_id] = score
+
+        # Lexical and OKF metadata match: if question explicitly references document filename or concept
+        q_lower = question.lower()
+        for doc in available_documents:
+            doc_id = doc.get("id")
+            if not doc_id or doc_id not in ready_doc_ids:
+                continue
+
+            fname = doc.get("filename", "").lower()
+            fname_stem = fname.rsplit(".", 1)[0].replace("_", " ").replace("-", " ")
+            okf_concept = (doc.get("okf_concept_id") or "").lower()
+
+            # Meaningful tokens from filename
+            tokens = [t for t in fname_stem.split() if len(t) > 3]
+            matched_tokens = sum(1 for t in tokens if t in q_lower)
+
+            if (tokens and matched_tokens >= len(tokens) / 2) or (okf_concept and okf_concept in q_lower):
+                if doc_id not in selected_doc_scores:
+                    direct_hits = vector_store.query(query_text=question, document_ids=[doc_id], top_k=1)
+                    if direct_hits:
+                        selected_doc_scores[doc_id] = direct_hits[0]["score"]
 
         # Select documents whose max chunk score meets threshold
         selected_ids = [

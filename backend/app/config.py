@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     # Ollama runtime settings
     OLLAMA_URL: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "qwen3.5:latest"
-    OLLAMA_TIMEOUT_SECONDS: float = 120.0
+    OLLAMA_TIMEOUT_SECONDS: float = 300.0
 
     # RAG & Storage Settings
     BASE_DATA_DIR: Path = Path("data")

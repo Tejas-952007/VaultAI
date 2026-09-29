@@ -1,0 +1,24 @@
+concept:
+  type: agent
+  id: coding_agent
+  name: Coding Agent
+  description: >
+    Autonomous code generation, analysis, and debugging agent operating
+    strictly within an isolated Docker sandbox container.
+
+agent:
+  framework: langgraph
+  purpose:
+    - code_generation
+    - code_analysis
+    - sandbox_execution
+
+access:
+  allowed_roles:
+    - admin
+    - engineer
+
+security:
+  isolation: docker_sandbox
+  network_access: disabled
+  audit_logging: true

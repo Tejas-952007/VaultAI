@@ -1,0 +1,18 @@
+concept:
+  type: role
+  id: engineer
+  name: Engineer
+  description: >
+    Technical engineering personnel with access to P&ID diagrams,
+    operating procedures, and engineering reports.
+
+access:
+  clearance_level: 4
+  allowed_document_types:
+    - P&ID
+    - SOP
+    - engineering_report
+    - technical_specification
+  can_manage_users: false
+  can_view_audit: false
+  can_execute_code: true

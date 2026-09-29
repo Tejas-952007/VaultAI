@@ -1,0 +1,26 @@
+concept:
+  type: document
+  id: engineering_report
+  name: Engineering Report
+  description: >
+    Technical engineering report detailing refinery process units,
+    safety operating limits, reactor thresholds, and emergency shutoff conditions.
+
+metadata:
+  category: industrial_document
+  document_type: engineering_report
+  sensitivity: confidential
+
+access:
+  allowed_roles:
+    - admin
+    - engineer
+
+retrieval:
+  enabled: true
+  collection: industrial_documents
+
+processing:
+  chunking: true
+  embeddings: true
+  citation_required: true

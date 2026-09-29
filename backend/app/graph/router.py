@@ -2,24 +2,27 @@ from backend.app.graph.state import VaultAIState
 from backend.app.audit.audit import audit_logger
 
 
+import re
+
+ENGINEERING_DOCUMENT_PHRASES = [
+    "specification code", "product designation", "pipeline code",
+    "drawing", "drawings", "p&id", "pid", "process flow", "insulation class",
+    "pressure class", "hazard class", "designation code", "engineering report",
+    "reactor", "refinery", "instrument air", "standard operating procedure",
+]
+
 DOCUMENT_KEYWORDS = [
     "document", "report", "sop", "manual", "uploaded file",
     "according to the document", "what does the report say",
     "based on the documents", "pdf", "file"
 ]
 
-CODING_KEYWORDS = [
-    "code", "python", "javascript", "function", "script",
-    "debug", "programming", "class", "def ", "import "
-]
-
 VISION_KEYWORDS = [
-    "image", "photo", "diagram", "visual", "inspect image",
-    "picture", "chart", "figure"
+    "image", "photo", "inspect image", "picture", "figure", "visual"
 ]
 
 
-def classify_route(message: str, document_ids: float = None) -> str:
+def classify_route(message: str, document_ids: list | None = None) -> str:
     """Deterministic keyword/rule classifier."""
     msg_lower = message.lower()
 
@@ -27,20 +30,32 @@ def classify_route(message: str, document_ids: float = None) -> str:
     if document_ids:
         return "document"
 
-    # Check vision keywords first
+    # Engineering document domain terms always belong to document RAG
+    for phrase in ENGINEERING_DOCUMENT_PHRASES:
+        if phrase in msg_lower:
+            return "document"
+
+    # Check vision keywords
     for kw in VISION_KEYWORDS:
         if kw in msg_lower:
             return "vision"
-
-    # Check coding keywords
-    for kw in CODING_KEYWORDS:
-        if kw in msg_lower:
-            return "coding"
 
     # Check document keywords
     for kw in DOCUMENT_KEYWORDS:
         if kw in msg_lower:
             return "document"
+
+    # Check coding patterns (prevent false positives on technical codes/classes)
+    if any(k in msg_lower for k in ["python", "javascript", "typescript", "debug", "programming", "def ", "import "]):
+        return "coding"
+    if re.search(r"\b(?:write|generate|execute|run|debug)\s+(?:a\s+)?(?:code|function|script|class)\b", msg_lower):
+        return "coding"
+    if re.search(r"\bclass\s+in\s+programming\b", msg_lower):
+        return "coding"
+    if re.search(r"\bfunction\b", msg_lower) and any(w in msg_lower for w in ["write", "compute", "calculate", "return"]):
+        return "coding"
+    if re.search(r"\bscript\b", msg_lower):
+        return "coding"
 
     # Default fallback to document RAG
     return "document"

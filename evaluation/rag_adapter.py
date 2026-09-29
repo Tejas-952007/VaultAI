@@ -27,7 +27,8 @@ async def run_existing_rag(question: str) -> Dict[str, Any]:
 
     start = time.perf_counter()
     response = await chat_service.handle_chat(
-        ChatRequest(message=question, document_ids=[])
+        ChatRequest(message=question, document_ids=[]),
+        employee_position="Engineer",
     )
     latency_s = time.perf_counter() - start
 

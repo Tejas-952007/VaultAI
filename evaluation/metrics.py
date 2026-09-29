@@ -35,15 +35,44 @@ def _parse_json_object(text: str) -> Optional[Dict[str, Any]]:
     if not text:
         return None
     cleaned = text.strip()
-    cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
-    cleaned = re.sub(r"\s*```$", "", cleaned)
-    match = _JSON_OBJECT_RE.search(cleaned)
-    if not match:
-        return None
+    cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned, flags=re.MULTILINE)
+    cleaned = re.sub(r"\s*```$", "", cleaned, flags=re.MULTILINE).strip()
     try:
-        return json.loads(match.group(0))
-    except json.JSONDecodeError:
-        return None
+        return json.loads(cleaned)
+    except Exception:
+        pass
+
+    # Repair common LLM issues like missing array bracket before object close
+    for pattern, replacement in [
+        (r"\"\s*\}\}+\s*$", "\"]}"),
+        (r"\}\}+\s*$", "}"),
+        (r",\s*([\]\}])", r"\1"),
+    ]:
+        try:
+            repaired = re.sub(pattern, replacement, cleaned)
+            return json.loads(repaired)
+        except Exception:
+            pass
+
+    match = _JSON_OBJECT_RE.search(cleaned)
+    if match:
+        candidate = match.group(0)
+        try:
+            return json.loads(candidate)
+        except Exception:
+            pass
+        for pattern, replacement in [
+            (r"\"\s*\}\}+\s*$", "\"]}"),
+            (r"\}\}+\s*$", "}"),
+            (r",\s*([\]\}])", r"\1"),
+        ]:
+            try:
+                cand_repaired = re.sub(pattern, replacement, candidate)
+                return json.loads(cand_repaired)
+            except Exception:
+                pass
+
+    return None
 
 
 def _judge(prompt: str) -> Dict[str, Any]:
@@ -51,14 +80,35 @@ def _judge(prompt: str) -> Dict[str, Any]:
         prompt=prompt,
         system_prompt=(
             "You are a strict evaluation judge for a RAG system. "
-            "Reply with a single JSON object only. No markdown. No extra text."
+            "Reply with a single valid JSON object only. Ensure all brackets are properly closed. No markdown code fences. No extra text."
         ),
-        options={"num_predict": 400, "temperature": 0.0},
+        options={"num_predict": 1024, "temperature": 0.0},
     )
-    parsed = _parse_json_object(result.get("text", ""))
-    if parsed is None:
-        raise ValueError(f"Judge did not return JSON: {result.get('text', '')[:400]}")
-    return parsed
+    raw_text = result.get("text", "")
+    parsed = _parse_json_object(raw_text)
+    if parsed is not None:
+        return parsed
+
+    # Resilient fallback: regex extraction for statements
+    statement_matches = re.findall(
+        r'\{\s*"text"\s*:\s*"([^"]+)"\s*,\s*"supported"\s*:\s*(true|false)\s*\}',
+        raw_text,
+        re.IGNORECASE,
+    )
+    if statement_matches:
+        return {
+            "statements": [
+                {"text": text, "supported": (supported.lower() == "true")}
+                for text, supported in statement_matches
+            ]
+        }
+
+    # Resilient fallback: regex extraction for questions
+    question_matches = re.findall(r'"([^"\n\r]+\?)"', raw_text)
+    if question_matches:
+        return {"questions": question_matches[:3]}
+
+    raise ValueError(f"Judge did not return JSON: {raw_text[:400]}")
 
 
 def _cosine(a: Sequence[float], b: Sequence[float]) -> float:
